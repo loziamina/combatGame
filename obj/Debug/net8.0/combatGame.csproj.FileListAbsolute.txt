@@ -12,3 +12,4 @@ C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\refint\combatGame.d
 C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.pdb
 C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.genruntimeconfig.cache
 C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\ref\combatGame.dll
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.sourcelink.json
