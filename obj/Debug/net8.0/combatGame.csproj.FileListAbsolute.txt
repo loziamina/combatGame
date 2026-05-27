@@ -1,0 +1,14 @@
+C:\Public\SupVinci\C#\gamecombat\combatGame\bin\Debug\net8.0\combatGame.exe
+C:\Public\SupVinci\C#\gamecombat\combatGame\bin\Debug\net8.0\combatGame.deps.json
+C:\Public\SupVinci\C#\gamecombat\combatGame\bin\Debug\net8.0\combatGame.runtimeconfig.json
+C:\Public\SupVinci\C#\gamecombat\combatGame\bin\Debug\net8.0\combatGame.dll
+C:\Public\SupVinci\C#\gamecombat\combatGame\bin\Debug\net8.0\combatGame.pdb
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.AssemblyInfoInputs.cache
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.AssemblyInfo.cs
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.csproj.CoreCompileInputs.cache
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.dll
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\refint\combatGame.dll
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.pdb
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\combatGame.genruntimeconfig.cache
+C:\Public\SupVinci\C#\gamecombat\combatGame\obj\Debug\net8.0\ref\combatGame.dll
