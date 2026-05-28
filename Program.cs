@@ -33,34 +33,40 @@ else if (choixClasse == "3")
 
 Console.WriteLine("Vous jouez : " + heroName + " le " + nomClasse + " !");
 
-int pvHero = 0;
-int attaqueHero = 0;
+// creation de l'objet hero
+Hero hero = new Hero();
+
+hero.Nom = heroName;
+hero.Classe = nomClasse;
+
+hero.Pv = 0;
+hero.Attaque = 0;
 
 if (nomClasse == "Guerrier")
 {
-  pvHero = 120;
-  attaqueHero = 18;
+  hero.Pv = 120;
+  hero.Attaque = 18;
 }
 else if (nomClasse == "Mage")
 {
-  pvHero = 80;
-  attaqueHero = 12;
+  hero.Pv = 80;
+  hero.Attaque = 12;
 }
 else if (nomClasse == "Voleur")
 {
-  pvHero = 90;
-  attaqueHero = 14;
+  hero.Pv = 90;
+  hero.Attaque = 14;
 }
 
-Console.WriteLine("PV : " + pvHero);
-Console.WriteLine("Attaque : " + attaqueHero);
+Console.WriteLine("PV : " + hero.Pv);
+Console.WriteLine("Attaque : " + hero.Attaque);
 
 int numeroVague = 1;
 int totalVagues = 3;
 int cooldown = 0;
 
 // boucle des vagues
-while (numeroVague <= totalVagues && pvHero > 0)
+while (numeroVague <= totalVagues && hero.Pv > 0)
 {
   string nomEnnemi = "";
   int pvEnnemi = 0;
@@ -90,14 +96,14 @@ while (numeroVague <= totalVagues && pvHero > 0)
   Console.WriteLine("Un " + nomEnnemi + " apparaît !");
   Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi + " | Attaque : " + attaqueEnnemi);
 
-  while (pvHero > 0 && pvEnnemi > 0)
+  while (hero.Pv > 0 && pvEnnemi > 0)
   {
     // Reduit le cooldown au début de chaque tour
     if (cooldown > 0)
       cooldown = cooldown - 1;
 
     Console.WriteLine("--- Votre tour ---");
-    Console.WriteLine(heroName + " | PV : " + pvHero);
+    Console.WriteLine(hero.Nom + " | PV : " + hero.Pv);
     Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi);
 
     // Menu d'actions
@@ -128,17 +134,17 @@ while (numeroVague <= totalVagues && pvHero > 0)
     if (choixAction == "1")
     {
       // Attaque normale
-      pvEnnemi = pvEnnemi - attaqueHero;
-      Console.WriteLine("Vous attaquez le " + nomEnnemi + " ! Il perd " + attaqueHero + " PV.");
+      pvEnnemi = pvEnnemi - hero.Attaque;
+      Console.WriteLine("Vous attaquez le " + nomEnnemi + " ! Il perd " + hero.Attaque + " PV.");
     }
     else if (choixAction == "2")
     {
       // Soin
       if (soinsRestants > 0)
       {
-        pvHero = pvHero + 25;
+        hero.Pv = hero.Pv + 25;
         soinsRestants = soinsRestants - 1;
-        Console.WriteLine("Vous vous soignez de 25 PV ! PV actuels : " + pvHero + " | Soins restants : " + soinsRestants);
+        Console.WriteLine("Vous vous soignez de 25 PV ! PV actuels : " + hero.Pv + " | Soins restants : " + soinsRestants);
       }
       else
       {
@@ -154,14 +160,14 @@ while (numeroVague <= totalVagues && pvHero > 0)
       }
       else if (nomClasse == "Guerrier")
       {
-        int degats = (int)(attaqueHero * 1.5);
+        int degats = (int)(hero.Attaque * 1.5);
         pvEnnemi = pvEnnemi - degats;
         cooldown = 2;
         Console.WriteLine("Frappe Lourde ! Vous infligez " + degats + " dégâts !");
       }
       else if (nomClasse == "Mage")
       {
-        int degats = attaqueHero + 10;
+        int degats = hero.Attaque + 10;
         pvEnnemi = pvEnnemi - degats;
         cooldown = 3;
         Console.WriteLine("Éclair ! Vous infligez " + degats + " dégâts magiques !");
@@ -170,17 +176,19 @@ while (numeroVague <= totalVagues && pvHero > 0)
       {
         Random aleatoire = new Random();
         int tirage = aleatoire.Next(1, 101);
+
         if (tirage <= 30)
         {
-          int degats = attaqueHero * 2;
+          int degats = hero.Attaque * 2;
           pvEnnemi = pvEnnemi - degats;
           Console.WriteLine("COUP CRITIQUE ! Vous infligez " + degats + " dégâts !");
         }
         else
         {
-          pvEnnemi = pvEnnemi - attaqueHero;
-          Console.WriteLine("Pas de critique... Vous infligez " + attaqueHero + " dégâts.");
+          pvEnnemi = pvEnnemi - hero.Attaque;
+          Console.WriteLine("Pas de critique... Vous infligez " + hero.Attaque + " dégâts.");
         }
+
         cooldown = 2;
       }
     }
@@ -188,22 +196,23 @@ while (numeroVague <= totalVagues && pvHero > 0)
     // Lennemi attaque le hero
     if (pvEnnemi > 0)
     {
-      pvHero = pvHero - attaqueEnnemi;
+      hero.Pv = hero.Pv - attaqueEnnemi;
       Console.WriteLine(nomEnnemi + " attaque " + heroName + " ! Vous perdez " + attaqueEnnemi + " PV.");
     }
   }
 
   // fin de la vague
-  if (pvHero > 0)
+  if (hero.Pv > 0)
   {
     Console.WriteLine("Vague " + numeroVague + " terminée !");
 
     // recupere 20% des PV entre les vagues
     if (numeroVague < totalVagues)
     {
-      int pvRestores = (int)(pvHero * 0.20);
-      pvHero = pvHero + pvRestores;
-      Console.WriteLine("Vous récupérez " + pvRestores + " PV ! PV actuels : " + pvHero);
+      int pvRestores = (int)(hero.Pv * 0.20);
+      hero.Pv = hero.Pv + pvRestores;
+
+      Console.WriteLine("Vous récupérez " + pvRestores + " PV ! PV actuels : " + hero.Pv);
     }
 
     numeroVague = numeroVague + 1;
@@ -211,7 +220,7 @@ while (numeroVague <= totalVagues && pvHero > 0)
 }
 
 // affiche le résultat du combat
-if (pvHero > 0)
+if (hero.Pv > 0)
   Console.WriteLine("VICTOIRE ! Vous avez vaincu toutes les vagues !");
 else
   Console.WriteLine("Vous avez été vaincu...");
