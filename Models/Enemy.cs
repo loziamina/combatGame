@@ -1,8 +1,6 @@
-public class Hero
+public class Enemy
 {
   public string Nom;
-  public string Classe;
-
   public int Pv;
   public int Attaque;
 }
