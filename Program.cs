@@ -26,5 +26,15 @@ while (choixClasse != "1" && choixClasse != "2" && choixClasse != "3")
   choixClasse = Console.ReadLine();
 }
 
-Console.WriteLine("Vous avez choisi la classe numéro : " + choixClasse);
+
+string nomClasse = "";
+
+if (choixClasse == "1")
+  nomClasse = "Guerrier";
+else if (choixClasse == "2")
+  nomClasse = "Mage";
+else if (choixClasse == "3")
+  nomClasse = "Voleur";
+
+Console.WriteLine("Vous jouez : " + heroName + " le " + nomClasse + " !");
 
