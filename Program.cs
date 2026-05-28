@@ -33,30 +33,9 @@ else if (choixClasse == "3")
 
 Console.WriteLine("Vous jouez : " + heroName + " le " + nomClasse + " !");
 
-// creation de l'objet hero
-Hero hero = new Hero();
-
-hero.Nom = heroName;
-hero.Classe = nomClasse;
-
-hero.Pv = 0;
-hero.Attaque = 0;
-
-if (nomClasse == "Guerrier")
-{
-  hero.Pv = 120;
-  hero.Attaque = 18;
-}
-else if (nomClasse == "Mage")
-{
-  hero.Pv = 80;
-  hero.Attaque = 12;
-}
-else if (nomClasse == "Voleur")
-{
-  hero.Pv = 90;
-  hero.Attaque = 14;
-}
+// creation de l'objet hero avec la factory
+HeroFactory heroFactory = new HeroFactory();
+Hero hero = heroFactory.CreateHero(heroName, nomClasse);
 
 Console.WriteLine("PV : " + hero.Pv);
 Console.WriteLine("Attaque : " + hero.Attaque);
