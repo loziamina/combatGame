@@ -7,3 +7,24 @@ Console.Write("Entrez le nom de votre héros : ");
 string heroName = Console.ReadLine();
 
 Console.WriteLine("bonjour " + heroName);
+
+Console.WriteLine("Choisissez votre classe :");
+Console.WriteLine("1. Guerrier  (120 PV, 18 attaque)");
+Console.WriteLine("2. Mage      (80 PV, 12 attaque)");
+Console.WriteLine("3. Voleur    (90 PV, 14 attaque)");
+
+Console.Write("Votre choix (1/2/3) : ");
+string choixClasse = Console.ReadLine();
+
+//Console.WriteLine("Vous avez choisi : " + choixClasse);
+// On vérifie que le joueur a tapé 1, 2 ou 3
+// Sinon on lui redemande
+while (choixClasse != "1" && choixClasse != "2" && choixClasse != "3")
+{
+  Console.WriteLine("Choix invalide ! Tapez 1, 2 ou 3.");
+  Console.Write("Votre choix (1/2/3) : ");
+  choixClasse = Console.ReadLine();
+}
+
+Console.WriteLine("Vous avez choisi la classe numéro : " + choixClasse);
+
