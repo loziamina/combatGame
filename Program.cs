@@ -69,28 +69,11 @@ int cooldown = 0;
 while (numeroVague <= totalVagues && hero.Pv > 0)
 {
   // creation de l'objet enemy
-  Enemy enemy = new Enemy();
 
   int soinsRestants = 2;
 
-  if (numeroVague == 1)
-  {
-    enemy.Nom = "Gobelin";
-    enemy.Pv = 40;
-    enemy.Attaque = 8;
-  }
-  else if (numeroVague == 2)
-  {
-    enemy.Nom = "Gobelin Archer";
-    enemy.Pv = 35;
-    enemy.Attaque = 11;
-  }
-  else if (numeroVague == 3)
-  {
-    enemy.Nom = "Boss Orc";
-    enemy.Pv = 150;
-    enemy.Attaque = 22;
-  }
+  EnemyFactory enemyFactory = new EnemyFactory();
+  Enemy enemy = enemyFactory.CreateEnemy(numeroVague);
 
   Console.WriteLine("=== VAGUE " + numeroVague + "/" + totalVagues + " ===");
   Console.WriteLine("Un " + enemy.Nom + " apparaît !");
@@ -135,6 +118,7 @@ while (numeroVague <= totalVagues && hero.Pv > 0)
     {
       // Attaque normale
       enemy.Pv = enemy.Pv - hero.Attaque;
+
       Console.WriteLine("Vous attaquez le " + enemy.Nom + " ! Il perd " + hero.Attaque + " PV.");
     }
     else if (choixAction == "2")
