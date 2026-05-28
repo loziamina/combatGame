@@ -38,3 +38,27 @@ else if (choixClasse == "3")
 
 Console.WriteLine("Vous jouez : " + heroName + " le " + nomClasse + " !");
 
+
+// definir les stats 
+
+int pyHero = 0;
+int attaqueHero = 0;
+
+if (nomClasse == "Guerrier")
+{
+  pyHero = 120;
+  attaqueHero = 18;
+}
+else if (nomClasse == "Mage")
+{
+  pyHero = 80;
+  attaqueHero = 12;
+}
+else if (nomClasse == "Voleur")
+{
+  pyHero = 90;
+  attaqueHero = 14;
+}
+
+Console.WriteLine("PV : " + pyHero);
+Console.WriteLine("Attaque : " + attaqueHero);
