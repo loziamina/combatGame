@@ -41,26 +41,26 @@ Console.WriteLine("Vous jouez : " + heroName + " le " + nomClasse + " !");
 
 // definir les stats 
 
-int pyHero = 0;
+int pvHero = 0;
 int attaqueHero = 0;
 
 if (nomClasse == "Guerrier")
 {
-  pyHero = 120;
+  pvHero = 120;
   attaqueHero = 18;
 }
 else if (nomClasse == "Mage")
 {
-  pyHero = 80;
+  pvHero = 80;
   attaqueHero = 12;
 }
 else if (nomClasse == "Voleur")
 {
-  pyHero = 90;
+  pvHero = 90;
   attaqueHero = 14;
 }
 
-Console.WriteLine("PV : " + pyHero);
+Console.WriteLine("PV : " + pvHero);
 Console.WriteLine("Attaque : " + attaqueHero);
 
 
@@ -70,3 +70,30 @@ int attaqueEnnemi = 8;
 
 Console.WriteLine("Un " + nomEnnemi + " apparaît ! ");
 Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi + " | Attaque : " + attaqueEnnemi);
+
+// tant que le hero et lennemi en vie le combat continue 
+while (pvHero > 0 && pvEnnemi > 0)
+{
+  // Affiche l'état du combat
+  Console.WriteLine("--- Votre tour ---");
+  Console.WriteLine(heroName + " | PV : " + pvHero);
+  Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi);
+
+  // Le héros attaque l'ennemi
+  Console.WriteLine("Vous attaquez le " + nomEnnemi + " !");
+  pvEnnemi = pvEnnemi - attaqueHero;
+  Console.WriteLine(nomEnnemi + " perd " + attaqueHero + " PV. PV restants : " + pvEnnemi);
+
+  // L'ennemi attaque le hero 
+  if (pvEnnemi > 0)
+  {
+    Console.WriteLine(nomEnnemi + " attaque " + heroName + " !");
+    pvHero = pvHero - attaqueEnnemi;
+    Console.WriteLine(heroName + " perd " + attaqueEnnemi + " PV. PV restants : " + pvHero);
+  }
+}
+
+if (pvHero > 0)
+  Console.WriteLine("Vous avez vaincu le " + nomEnnemi + " !");
+else
+  Console.WriteLine("Vous avez ete vaincu...");
