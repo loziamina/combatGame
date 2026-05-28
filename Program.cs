@@ -62,3 +62,11 @@ else if (nomClasse == "Voleur")
 
 Console.WriteLine("PV : " + pyHero);
 Console.WriteLine("Attaque : " + attaqueHero);
+
+
+string nomEnnemi = "Gobelin";
+int pvEnnemi = 40;
+int attaqueEnnemi = 8;
+
+Console.WriteLine("Un " + nomEnnemi + " apparaît ! ");
+Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi + " | Attaque : " + attaqueEnnemi);
