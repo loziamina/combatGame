@@ -67,6 +67,7 @@ Console.WriteLine("Attaque : " + attaqueHero);
 string nomEnnemi = "Gobelin";
 int pvEnnemi = 40;
 int attaqueEnnemi = 8;
+int soinsRestants = 2;
 
 Console.WriteLine("Un " + nomEnnemi + " apparaît ! ");
 Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi + " | Attaque : " + attaqueEnnemi);
@@ -74,26 +75,50 @@ Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi + " | Attaque : " + attaqueE
 // tant que le hero et lennemi en vie le combat continue 
 while (pvHero > 0 && pvEnnemi > 0)
 {
-  // Affiche l'état du combat
+
   Console.WriteLine("--- Votre tour ---");
   Console.WriteLine(heroName + " | PV : " + pvHero);
   Console.WriteLine(nomEnnemi + " | PV : " + pvEnnemi);
 
-  // Le héros attaque l'ennemi
-  Console.WriteLine("Vous attaquez le " + nomEnnemi + " !");
-  pvEnnemi = pvEnnemi - attaqueHero;
-  Console.WriteLine(nomEnnemi + " perd " + attaqueHero + " PV. PV restants : " + pvEnnemi);
+  // le menu daction
+  Console.WriteLine("Que voulez-vous faire ?");
+  Console.WriteLine("1. Attaquer");
+  Console.WriteLine("2. Se soigner (+25 PV)");
 
-  // L'ennemi attaque le hero 
+  Console.Write("Votre choix (1/2) : ");
+  string choixAction = Console.ReadLine();
+
+  while (choixAction != "1" && choixAction != "2")
+  {
+    Console.WriteLine("Choix invalide ! Tapez 1 ou 2.");
+    Console.Write("Votre choix (1/2) : ");
+    choixAction = Console.ReadLine();
+  }
+
+  if (choixAction == "1")
+  {
+    // Attaque
+    pvEnnemi = pvEnnemi - attaqueHero;
+    Console.WriteLine("Vous attaquez le " + nomEnnemi + " ! Il perd " + attaqueHero + " PV.");
+  }
+  else if (choixAction == "2")
+  {
+    if (soinsRestants > 0)
+    {
+      pvHero = pvHero + 25;
+      soinsRestants = soinsRestants - 1;
+      Console.WriteLine("Vous vous soignez de 25 PV ! PV actuels : " + pvHero + " | Soins restants : " + soinsRestants);
+    }
+    else
+    {
+      Console.WriteLine("Vous n'avez plus de soins restants ");
+    }
+  }
+
+  // L'ennemi attaque le hero
   if (pvEnnemi > 0)
   {
-    Console.WriteLine(nomEnnemi + " attaque " + heroName + " !");
     pvHero = pvHero - attaqueEnnemi;
-    Console.WriteLine(heroName + " perd " + attaqueEnnemi + " PV. PV restants : " + pvHero);
+    Console.WriteLine(nomEnnemi + " attaque " + heroName + " ! Vous perdez " + attaqueEnnemi + " PV.");
   }
 }
-
-if (pvHero > 0)
-  Console.WriteLine("Vous avez vaincu le " + nomEnnemi + " !");
-else
-  Console.WriteLine("Vous avez ete vaincu...");
