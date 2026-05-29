@@ -44,11 +44,15 @@ int numeroVague = 1;
 int totalVagues = 3;
 int cooldown = 0;
 
+// creation des actions avec le pattern strategy
+BasicAttackAction basicAttack = new BasicAttackAction();
+HealAction heal = new HealAction();
+SpecialAttackAction specialAttack = new SpecialAttackAction();
+
 // boucle des vagues
 while (numeroVague <= totalVagues && hero.Pv > 0)
 {
   // creation de l'objet enemy
-
   int soinsRestants = 2;
 
   EnemyFactory enemyFactory = new EnemyFactory();
@@ -70,8 +74,8 @@ while (numeroVague <= totalVagues && hero.Pv > 0)
 
     // Menu d'actions
     Console.WriteLine("Que voulez-vous faire ?");
-    Console.WriteLine("1. Attaquer");
-    Console.WriteLine("2. Se soigner (+25 PV) - reste : " + soinsRestants);
+    Console.WriteLine("1. " + basicAttack.Nom);
+    Console.WriteLine("2. " + heal.Nom + " - reste : " + soinsRestants);
 
     // Affiche la compétence selon la classe et le cooldown
     if (cooldown > 0)
@@ -93,26 +97,23 @@ while (numeroVague <= totalVagues && hero.Pv > 0)
       choixAction = Console.ReadLine();
     }
 
-    if (choixAction == "1")
-    {
-      // Attaque normale
-      enemy.Pv = enemy.Pv - hero.Attaque;
+    // on choisit l'action selon le choix du joueur
+    ICombatAction action = null;
 
-      Console.WriteLine("Vous attaquez le " + enemy.Nom + " ! Il perd " + hero.Attaque + " PV.");
-    }
+    if (choixAction == "1")
+      action = basicAttack;
     else if (choixAction == "2")
     {
       // Soin
       if (soinsRestants > 0)
       {
-        hero.Pv = hero.Pv + 25;
         soinsRestants = soinsRestants - 1;
-
-        Console.WriteLine("Vous vous soignez de 25 PV ! PV actuels : " + hero.Pv + " | Soins restants : " + soinsRestants);
+        action = heal;
       }
       else
       {
         Console.WriteLine("Plus de soins disponibles !");
+        continue;
       }
     }
     else if (choixAction == "3")
@@ -121,54 +122,29 @@ while (numeroVague <= totalVagues && hero.Pv > 0)
       if (cooldown > 0)
       {
         Console.WriteLine("Compétence pas encore disponible !");
+        continue;
       }
-      else if (nomClasse == "Guerrier")
+      else
       {
-        int degats = (int)(hero.Attaque * 1.5);
+        action = specialAttack;
 
-        enemy.Pv = enemy.Pv - degats;
-        cooldown = 2;
-
-        Console.WriteLine("Frappe Lourde ! Vous infligez " + degats + " dégâts !");
-      }
-      else if (nomClasse == "Mage")
-      {
-        int degats = hero.Attaque + 10;
-
-        enemy.Pv = enemy.Pv - degats;
-        cooldown = 3;
-
-        Console.WriteLine("Éclair ! Vous infligez " + degats + " dégâts magiques !");
-      }
-      else if (nomClasse == "Voleur")
-      {
-        Random aleatoire = new Random();
-        int tirage = aleatoire.Next(1, 101);
-
-        if (tirage <= 30)
-        {
-          int degats = hero.Attaque * 2;
-
-          enemy.Pv = enemy.Pv - degats;
-
-          Console.WriteLine("COUP CRITIQUE ! Vous infligez " + degats + " dégâts !");
-        }
-        else
-        {
-          enemy.Pv = enemy.Pv - hero.Attaque;
-
-          Console.WriteLine("Pas de critique... Vous infligez " + hero.Attaque + " dégâts.");
-        }
-
-        cooldown = 2;
+        if (nomClasse == "Guerrier")
+          cooldown = 2;
+        else if (nomClasse == "Mage")
+          cooldown = 3;
+        else if (nomClasse == "Voleur")
+          cooldown = 2;
       }
     }
+
+    // on execute l'action et on affiche le resultat
+    string resultat = action.Execute(hero, enemy);
+    Console.WriteLine(resultat);
 
     // Lennemi attaque le hero
     if (enemy.Pv > 0)
     {
       hero.Pv = hero.Pv - enemy.Attaque;
-
       Console.WriteLine(enemy.Nom + " attaque " + heroName + " ! Vous perdez " + enemy.Attaque + " PV.");
     }
   }
@@ -182,9 +158,7 @@ while (numeroVague <= totalVagues && hero.Pv > 0)
     if (numeroVague < totalVagues)
     {
       int pvRestores = (int)(hero.Pv * 0.20);
-
       hero.Pv = hero.Pv + pvRestores;
-
       Console.WriteLine("Vous récupérez " + pvRestores + " PV ! PV actuels : " + hero.Pv);
     }
 
